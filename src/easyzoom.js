@@ -5,6 +5,10 @@
     var dw, dh, rw, rh, lx, ly;
 
     var defaults = {
+
+        // id of the node which load the zoom layer
+        zoomNodeWrapperId: undefined,
+
         // Zoom image url attribute
         zoomImageUrlAttribute: 'href',
 
@@ -110,7 +114,16 @@
             return;
         }
 
-        this.$target.append(this.$flyout);
+        var $wrapper;
+		
+		if (this.opts.zoomNodeWrapperId !== undefined) {
+			$wrapper = $('#' + this.opts.zoomNodeWrapperId);
+		}
+		else {
+			$wrapper = this.$target;
+		}
+
+        $wrapper.append(this.$flyout);
 
         w1 = this.$target.width();
         h1 = this.$target.height();
